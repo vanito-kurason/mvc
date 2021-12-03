@@ -1,4 +1,11 @@
 {
-    "name": "kurason/mvc",
-    "require": {}
+  "name": "kurason/mvc",
+  "require": {
+    "php": ">=7.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "\\Core\\": "/core/"
+    }
+  }
 }
