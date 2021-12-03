@@ -10,7 +10,7 @@
 		
 		private function renderLayout(Page $page, $content)
     {
-			$layoutPath = $_SERVER['DOCUMENT_ROOT'] . "/articles/layout/{$page->layout}.php";
+			$layoutPath = $_SERVER['DOCUMENT_ROOT'] . "/src/layout/{$page->layout}.php";
 			if (file_exists($layoutPath))
       {
       	ob_start();
@@ -24,7 +24,7 @@
     {
       if ($page->view)
       {
-				$viewPath = $_SERVER['DOCUMENT_ROOT'] . "/articles/view/{$page->view}.php";
+				$viewPath = $_SERVER['DOCUMENT_ROOT'] . "/src/view/{$page->view}.php";
 				
 				if (file_exists($viewPath))
         {
