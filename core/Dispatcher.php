@@ -5,10 +5,11 @@
   {
     public function getPage(Track $track)
 		{
+      $controllerNamespace = $track->controllerNamespace;
       $controller = $track->controller;
       $action = $track->action;
       
-			$fullName = "\\Articles\\Controllers\\$controller";
+			$fullName = $controllerNamespace . $controller;
 			
 			try {
 				$controller = new $fullName;

@@ -3,10 +3,12 @@
 
   class Track
   {
+    private $controllerNamespace;
     private $controller;
     private $action;
     
-    public function __construct($controller, $action) {
+    public function __construct($controllerNamespace, $controller, $action) {
+      $this->controllerNamespace = $controllerNamespace;
       $this->controller = $controller;
       $this->action = $action;
     }

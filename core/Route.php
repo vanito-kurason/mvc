@@ -8,14 +8,25 @@
 		private $controller;
 		private $action;
 		
-		public function __construct($method, $path, $controller, $action)
+		public function __construct($methodSpacePath, $controllerAtAction)
 		{
-			$this->method = $method;
-			$this->path = $path;
-			$this->controller = $controller;
-			$this->action = $action;
+      parseMethodPath($methodSpacePath);
+      parseControllerAction($controllerAction);
 		}
 		
+    private function parseMethodPath($methodSpacePath)
+    {
+      preg_match("#^(<$method>.*) (<$path>.*)?#", $methodSpacePath, $matches);
+      $this->method = $matches['method'];
+			$this->path = $matches['path'];
+    }
+    
+    private function parseControllerAction($controllerAtAction)
+    {
+      preg_match("#^(<$controller>.*)@(<$action>.*)?#", $controllerAtAction, $matches);
+      $this->method = $matches['controller'];
+			$this->path = $matches['action'];
+    }
 		public function __get($property)
 		{
 			return $this->$property;
