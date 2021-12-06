@@ -15,8 +15,8 @@
 			$this->path = $matches[2];
       
       preg_match("#^(.+)@(.+?)$#", $controllerAtAction, $matches);
-      $this->method = $matches[1];
-			$this->path = $matches[2];
+      $this->controller = $matches[1];
+			$this->action = $matches[2];
 		}
 
 		public function __get($property)
