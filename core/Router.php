@@ -43,13 +43,13 @@ class Router
         echo "Ошибка в конфигурационном файле routes.php";
           die();
       }
+    }
 
-      if (isset($this->controller) && isset($this->action) && isset($this->controllerNamespace)) {
-        return new Track($this->controllerNamespace, $this->controller, $this->action);
-      } else {
-        echo "404: Страница не найдена!";
-        die();
-      }
+    if (isset($this->controller) && isset($this->action) && isset($this->controllerNamespace)) {
+      return new Track($this->controllerNamespace, $this->controller, $this->action);
+    } else {
+      echo "404: Страница не найдена!";
+      die();
     }
   }
 
