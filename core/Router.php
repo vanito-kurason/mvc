@@ -6,6 +6,7 @@ class Router
   private $controllerNamespace;
   private $controller;
   private $action;
+  private $params;
 
   private static function getRealMethod(): string
     {
@@ -27,16 +28,19 @@ class Router
   public function handleRequest(array $routes): Track
   {
     $method = self::getRealMethod();
-    $url = $_SERVER['REQUEST_URI'];
+    $uri = $_SERVER['REQUEST_URI'];
 
     foreach ($routes as $key => $value) {
       if ($key === 'controllerNamespace') {
         $this->controllerNamespace = $value;
       } elseif ($key === 'routes') {
           foreach ($value as $route) {
-            if ("$route->method $route->path" === "$method $url") {
+            $pattern = $this->createPattern($route->path);
+            
+            if (preg_match($pattern, $uri, $params) && "$route->method" === "$method") {
               $this->controller = $route->controller;
               $this->action = $route->action;
+              $this->params = $this->clearParams($params);
             }
           }
       } else {
@@ -46,13 +50,31 @@ class Router
     }
 
     if (isset($this->controller) && isset($this->action) && isset($this->controllerNamespace)) {
-      return new Track($this->controllerNamespace, $this->controller, $this->action);
+      return new Track($this->controllerNamespace, $this->controller, $this->action, $this->params);
     } else {
       echo "404: Страница не найдена!";
       die();
     }
   }
+  
+  private function createPattern($path)
+		{
+			return '#^' . preg_replace('#/:([^/]+)#', '/(?<$1>[^/]+)', $path) . '/?$#';
+		}
+		
+  private function clearParams($params)
+  {
+    $result = [];
 
+    foreach ($params as $key => $param) {
+      if (!is_int($key)) {
+        $result[$key] = $param;
+      }
+    }
+
+    return $result;
+  }
+  
   public function __get($property)
   {
     return $this->$property;
