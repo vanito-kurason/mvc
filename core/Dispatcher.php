@@ -12,7 +12,7 @@ class Dispatcher
       $controller = new $fullName;
 
       if (method_exists($controller, $action)) {
-        $result = $controller->$action();
+        $result = $controller->$action($track->params);
 
         if ($result) {
           return $result;

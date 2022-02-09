@@ -10,7 +10,7 @@ class View
 
   private function renderLayout(Page $page, $content)
   {
-    $layoutPath = __DIR__ . "../../../../src/layout/{$page->layout}.php";
+    $layoutPath = __DIR__ . "/../../../../src/layout/{$page->layout}.php";
     if (file_exists($layoutPath))
     {
       ob_start();
@@ -23,7 +23,7 @@ class View
   private function renderView(Page $page) 
   {
     if ($page->view) {
-      $viewPath = __DIR__ . "../../../../src/view/{$page->view}.php";
+      $viewPath = __DIR__ . "/../../../../src/view/{$page->view}.php";
 
       if (file_exists($viewPath)) {
         ob_start();
@@ -31,7 +31,7 @@ class View
         include $viewPath;
         return ob_get_clean();
       } else {
-        echo "Not найден файл с представлением по пути $viewPath";
+        echo "Не найден файл с представлением по пути $viewPath";
         die();
       }
     }
