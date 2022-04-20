@@ -3,7 +3,7 @@ namespace Core;
 
 class Dispatcher
 {
-  public function getPage(Track $track)
+  public function getPage(Track $track): Page
   {
     $fullName = ($track->controllerNamespace) . $track->controller;
     $action = $track->action;

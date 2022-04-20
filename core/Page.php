@@ -8,7 +8,7 @@ class Page
   private $view;
   private $content;
 
-  public function __construct($layout, $title, $view = NULL, $content = '')
+  public function __construct(string $layout, string $title, string $view = NULL, string $content = '')
   {
     $this->layout = $layout;
     $this->title = $title;
